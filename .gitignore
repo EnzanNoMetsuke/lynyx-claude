@@ -1,0 +1,10 @@
+# Claude Code local settings
+.claude/settings.local.json
+
+# IDE
+.vscode/
+.idea/
+
+# Dependencies
+node_modules/
+__pycache__/

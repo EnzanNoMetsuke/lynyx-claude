@@ -1,0 +1,13 @@
+{
+  "name": "lynyx-claude-plugins",
+  "owner": {
+    "name": "lynyx"
+  },
+  "plugins": [
+    {
+      "name": "lynyx-agent-kit",
+      "source": "./plugins/lynyx-agent-kit",
+      "description": "Custom skills and tools for Claude Code"
+    }
+  ]
+}
