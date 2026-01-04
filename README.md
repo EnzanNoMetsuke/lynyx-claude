@@ -15,11 +15,23 @@ This project serves as a development workspace for custom Claude Code plugins. I
 ├── .specs/                   # Specification files for features
 │   └── SPEC-*.md            # Individual feature specs
 ├── plugins/                  # Plugin source directories
-│   └── lynyx-agent-kit/     # Custom agent toolkit plugin
+│   ├── lynyx-agent-kit/     # Custom agent toolkit plugin
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json  # Plugin manifest
+│   │   ├── commands/
+│   │   │   └── interview.md
+│   │   └── README.md
+│   └── git/                 # Git workflow commands plugin
 │       ├── .claude-plugin/
-│       │   └── plugin.json  # Plugin manifest
-│       ├── commands/        # Slash commands
-│       │   └── interview.md
+│       │   └── plugin.json
+│       ├── commands/
+│       │   ├── init.md
+│       │   ├── status.md
+│       │   ├── new-branch.md
+│       │   ├── commit.md
+│       │   ├── push.md
+│       │   ├── remote-init.md
+│       │   └── help.md
 │       └── README.md
 ├── CLAUDE.md                 # Project guidelines for Claude Code
 └── README.md                 # This file
@@ -42,6 +54,11 @@ The `.claude-plugin/marketplace.json` file registers local plugin directories:
       "name": "lynyx-agent-kit",
       "source": "./plugins/lynyx-agent-kit",
       "description": "Custom skills and tools for Claude Code"
+    },
+    {
+      "name": "git",
+      "source": "./plugins/git",
+      "description": "Git workflow commands for common repository operations"
     }
   ]
 }
@@ -62,12 +79,27 @@ When you bump a plugin's version number, Claude Code creates a new cache entry a
 
 ### lynyx-agent-kit
 
-Custom skills and tools for development workflows.
+Custom commands and tools for development workflows.
 
 **Commands:**
-- `/lynyx-agent-kit:interview` - Interactive spec interviewer
+- `/lynyx-agent-kit:interview [spec_file]` - Interactive spec interviewer
 
 See `plugins/lynyx-agent-kit/README.md` for details.
+
+### git
+
+Git workflow commands for common repository operations.
+
+**Commands:**
+- `/git:init` - Initialize local git repository
+- `/git:status [--short|-s]` - Show status and diff summary
+- `/git:new-branch <branch_name>` - Create and switch to branch
+- `/git:commit [message] [--all|-a] [--interactive|-i]` - Commit with options
+- `/git:push [remote] [branch]` - Push to remote with confirmation
+- `/git:remote-init <repo_name> <private|public> [push]` - Create GitHub repo
+- `/git:help` - Show all git commands
+
+See `plugins/git/README.md` for details.
 
 ## Development Workflow
 
@@ -131,25 +163,30 @@ When ready to share:
 
 The `.specs/` directory contains living specification documents:
 
-- **SPEC-20260103_01-Development_Workflows.md** - Git workflow skills specification
+- **SPEC-20260103_01-Development_Workflows.md** - Git workflow commands specification
 
 These specs document features and serve as requirements for implementation.
 
 ## Git Workflow
 
-This is a git repository tracking plugin development:
+This is a git repository tracking plugin development. You can use either the git plugin commands or standard git CLI:
 
-```bash
-# View status
-git status
-
-# Commit changes
-git add .
-git commit -m "Description of changes"
-
-# Push to remote
-git push
+**Using the git plugin:**
 ```
+/git:status              # View status
+/git:commit -i          # Commit with interactive file selection
+/git:push               # Push to remote
+```
+
+**Using standard git:**
+```bash
+git status              # View status
+git add .              # Stage changes
+git commit -m "..."    # Commit
+git push               # Push to remote
+```
+
+**Note:** Follow [Conventional Commits](https://www.conventionalcommits.org/) format for all commits.
 
 ## References
 
