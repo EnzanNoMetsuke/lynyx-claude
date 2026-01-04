@@ -9,11 +9,11 @@ This spec defines a `git` plugin for Claude Code containing commands to streamli
 **Global Conventions**:
 - All commands output a brief success confirmation message
 - Destructive operations (remote changes) require user confirmation before executing
-- The plugin name is `git`, so all triggers are `/git:<skill>`
+- The plugin name is `git`, so all triggers are `/git:<command>`
 
 ---
 
-## DEV-SKILL-01: Local Git Repository Initialization
+## DEV-CMD-01: Local Git Repository Initialization
 
 Initialize a new local git repository in the current project directory.
 
@@ -29,7 +29,7 @@ Initialize a new local git repository in the current project directory.
 
 ---
 
-## DEV-SKILL-02: Remote Git Repository Creation (GitHub)
+## DEV-CMD-02: Remote Git Repository Creation (GitHub)
 
 Create a new GitHub repository from the current project directory using the `gh` CLI.
 
@@ -69,7 +69,7 @@ Create a new GitHub repository from the current project directory using the `gh`
 
 ---
 
-## DEV-SKILL-03: Create New Branch & Switch
+## DEV-CMD-03: Create New Branch & Switch
 
 Create a new branch from HEAD and switch to it.
 
@@ -100,7 +100,7 @@ Create a new branch from HEAD and switch to it.
 
 ---
 
-## DEV-SKILL-04: Commit Changes
+## DEV-CMD-04: Commit Changes
 
 Commit staged changes with a message. Supports optional auto-staging and interactive file selection.
 
@@ -147,7 +147,7 @@ Commit staged changes with a message. Supports optional auto-staging and interac
 
 ---
 
-## DEV-SKILL-05: Push to Remote
+## DEV-CMD-05: Push to Remote
 
 Push commits to a remote repository.
 
@@ -183,7 +183,7 @@ Push commits to a remote repository.
 
 ---
 
-## DEV-SKILL-06: Show Status
+## DEV-CMD-06: Show Status
 
 Display repository status and diff summary.
 
@@ -219,7 +219,7 @@ Display repository status and diff summary.
 
 ---
 
-## DEV-SKILL-07: Help
+## DEV-CMD-07: Help
 
 Display all available git commands and their usage.
 
@@ -236,27 +236,29 @@ Display all available git commands and their usage.
 
 ## Plugin Structure
 
+Commands are implemented using a flat file structure where each command is a Markdown file in the `commands/` directory.
+
 ```
 plugins/
   git/
     .claude-plugin/
       plugin.json
     commands/
-      init/
-        SKILL.md
-      remote-init/
-        SKILL.md
-      new-branch/
-        SKILL.md
-      commit/
-        SKILL.md
-      push/
-        SKILL.md
-      status/
-        SKILL.md
-      help/
-        SKILL.md
+      init.md
+      remote-init.md
+      new-branch.md
+      commit.md
+      push.md
+      status.md
+      help.md
 ```
+
+Each command file includes:
+- YAML frontmatter with `description` and `argument-hint`
+- Instructions for Claude on how to execute the command
+- Argument parsing logic
+- Error handling patterns
+- Usage examples
 
 ---
 
