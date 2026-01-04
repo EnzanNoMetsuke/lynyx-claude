@@ -1,3 +1,8 @@
+## [0.1.1] - 2026-01-04
+
+### 📚 Documentation
+
+- Updated project README
 ## [0.1.0] - 2026-01-04
 
 ### 🚀 Features
@@ -12,3 +17,4 @@
 ### 📚 Documentation
 
 - Add README files for project and plugin
+- Add CHANGELOG.md for v0.1.0
