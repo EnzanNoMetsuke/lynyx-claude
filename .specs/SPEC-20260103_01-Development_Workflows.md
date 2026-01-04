@@ -1,13 +1,13 @@
-# SPECIFICATION: Claude Code Development Workflow Skills
+# SPECIFICATION: Claude Code Development Workflow Commands
 
-This spec defines a `git` plugin for Claude Code containing skills to streamline common git workflows.
+This spec defines a `git` plugin for Claude Code containing commands to streamline common git workflows.
 
 **Legend**:
 - Angle brackets denote a required argument (e.g. `<required_arg>`)
 - Square brackets denote an optional argument (e.g. `[optional_arg]`)
 
 **Global Conventions**:
-- All skills output a brief success confirmation message
+- All commands output a brief success confirmation message
 - Destructive operations (remote changes) require user confirmation before executing
 - The plugin name is `git`, so all triggers are `/git:<skill>`
 
@@ -221,13 +221,13 @@ Display repository status and diff summary.
 
 ## DEV-SKILL-07: Help
 
-Display all available git skills and their usage.
+Display all available git commands and their usage.
 
 - **Trigger:** `/git:help`
 
 ### Behavior
 
-1. List all git skills with:
+1. List all git commands with:
    - Trigger syntax
    - Brief description
    - Available flags/arguments
@@ -241,7 +241,7 @@ plugins/
   git/
     .claude-plugin/
       plugin.json
-    skills/
+    commands/
       init/
         SKILL.md
       remote-init/
@@ -270,5 +270,5 @@ _None at this time._
 
 | Date | Changes |
 |------|---------|
-| 2026-01-03 | Initial spec with 3 skills |
-| 2026-01-03 | Expanded to 7 skills based on interview; added behavior details, error handling, and confirmation requirements |
+| 2026-01-03 | Initial spec with 3 commands |
+| 2026-01-03 | Expanded to 7 commands based on interview; added behavior details, error handling, and confirmation requirements |
