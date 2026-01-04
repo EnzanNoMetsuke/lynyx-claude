@@ -8,6 +8,11 @@
       "name": "lynyx-agent-kit",
       "source": "./plugins/lynyx-agent-kit",
       "description": "Custom skills and tools for Claude Code"
+    },
+    {
+      "name": "git",
+      "source": "./plugins/git",
+      "description": "Git workflow commands for common repository operations"
     }
   ]
 }

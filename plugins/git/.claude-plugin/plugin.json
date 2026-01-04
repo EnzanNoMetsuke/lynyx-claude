@@ -1,0 +1,9 @@
+{
+  "name": "git",
+  "description": "Git workflow commands for common repository operations",
+  "version": "1.0.0",
+  "author": {
+    "name": "lynyx",
+    "email": "support@lynyx.net"
+  }
+}
