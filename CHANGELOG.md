@@ -8,6 +8,7 @@
 ### ⚙️ Miscellaneous Tasks
 
 - Ignore macOS files
+- Ignore changelog update commits in release notes
 ## [0.1.1] - 2026-01-04
 
 ### 📚 Documentation
