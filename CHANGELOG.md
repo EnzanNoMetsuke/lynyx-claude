@@ -1,8 +1,19 @@
+## [0.2.0] - 2026-01-07
+
+### 🚀 Features
+
+- Add auto-coder spec
+- Create new auto-coder skill
+
+### ⚙️ Miscellaneous Tasks
+
+- Ignore macOS files
 ## [0.1.1] - 2026-01-04
 
 ### 📚 Documentation
 
 - Updated project README
+- Update CHANGELOG.md for v0.1.1
 ## [0.1.0] - 2026-01-04
 
 ### 🚀 Features
