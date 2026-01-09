@@ -1,0 +1,273 @@
+<project_specification>
+  <project_name>{PROJECT_NAME}</project_name>
+
+  <overview>{PROJECT_OVERVIEW}</overview>
+
+  <technology_stack>
+    <api_key>
+      You can use an API key located at /tmp/api-key for testing. You will not be allowed to read this file, but you can reference it in code.
+    </api_key>
+    <frontend>
+      <framework>{FRAMEWORK}</framework>
+      <styling>{STYLING}</framework>
+      <state_management>{STATE_MANAGEMENT}</state_management>
+      <routing>{ROUTING}</routing>
+      <markdown>{MARKDOWN}</markdown>
+      <code_highlighting>Syntax highlighting for code blocks</code_highlighting>
+      <port>Only launch on {FRONTEND_PORT}</port>
+    </frontend>
+    <backend>
+      <runtime>{RUNTIME}</runtime>
+      <database>{DATABASE}</database>
+      <api_integration>{INTEGRATION}</api_integration>
+      <streaming>{STREAMING}</streaming>
+    <backend>
+    <communication>
+      <api>{API}</api>
+      <streaming>{STREAMING}</streaming>
+      <provider_api>{PROVIDER_API}</provider_api>
+    </communication>
+  </technology_stack>
+
+  <prerequisites>
+    <environment_setup>
+      - Repo includes .env with _____ configured
+      - Frontend dependencies pre-installed via {PACKAGE_MANAGER}
+      - Backend code goes in {BACKEND_DIR} directory
+      - Install backend dependencies as needed
+    </environment_setup>
+  </prerequisites>
+
+  <core_features>
+    <{FEATURE_NAME_1}>
+      {FEATURE_DESCRIPTION_LIST_1}
+    </{FEATURE_NAME_1}>
+
+    <{FEATURE_NAME_2}>
+      {FEATURE_DESCRIPTION_LIST_2}
+    </{FEATURE_NAME_2}>
+
+    <onboarding>
+      - Welcome screen for new users
+      - Feature tour highlights
+      - Examples of how to get started
+      - Quick tips and best practices
+      - Keyboard shortcuts tutorial
+    </onboarding>
+
+    <accessibility>
+      - Full keyboard navigation
+      - Screen reader support
+      - ARIA labels and roles
+      - High contrast mode
+      - Focus management
+      - Reduced motion support
+    </accessibility>
+
+    <responsive_design>
+      - Mobile-first responsive layout
+      - Touch-optimized interface
+      - Collapsible sidebar on mobile
+      - Swipe gestures for navigation
+      - Adaptive artifact display
+      - Progressive Web App (PWA) support
+    </responsive_design>
+  </core_features>
+
+  <database_schema>
+    <tables>
+      <{TABLE_NAME_1}>
+        {TABLE_DESCRIPTION_LIST_1}
+      </{TABLE_NAME_1}>
+
+      <{TABLE_NAME_2}>
+        {TABLE_DESCRIPTION_LIST_2}
+      </{TABLE_NAME_2}>
+
+      <users>
+        - id, email, name, avatar_url
+        - created_at, last_login
+        - preferences (JSON: theme, font_size, etc.)
+        - custom_instructions
+      </users>
+    </tables>
+  </database_schema>
+
+  <api_endpoints_summary>
+    <{API_ENDPOINT_1}>
+      {API_ENDPOINT_DESCRIPTION_LIST_1}
+    </{API_ENDPOINT_1}>
+
+    <{API_ENDPOINT_2}>
+      {API_ENDPOINT_DESCRIPTION_LIST_2}
+    </{API_ENDPOINT_2}>
+
+    <authentication>
+      - POST /api/auth/login
+      - POST /api/auth/logout
+      - GET /api/auth/me
+      - PUT /api/auth/profile
+    </authentication>    
+  </api_endpoints_summary>
+
+  <ui_layout>
+    <main_structure>
+      {MAIN_STRUCTURE_DESCRIPTION_LIST}
+    </main_structure>
+
+    <{UI_AREA_1}>
+      {UI_AREA_DESCRIPTION_LIST_1}
+    </{UI_AREA_1}>
+
+    <{UI_AREA_2}>
+      {UI_AREA_DESCRIPTION_LIST_2}
+    </{UI_AREA_2}>
+
+    <modals_overlays>
+      - Settings modal (tabbed interface)
+      - Share modal
+      - Export options modal
+      - Project settings modal
+      - Command palette overlay
+      - Keyboard shortcuts reference
+    </modals_overlays>
+  </ui_layout>
+
+  <design_system>
+    <color_palette>
+      - Primary: Orange/amber accent (#CC785C claude-style)
+      - Background: White (light mode), Dark gray (#1A1A1A dark mode)
+      - Surface: Light gray (#F5F5F5 light), Darker gray (#2A2A2A dark)
+      - Text: Near black (#1A1A1A light), Off-white (#E5E5E5 dark)
+      - Borders: Light gray (#E5E5E5 light), Dark gray (#404040 dark)
+      - Code blocks: Monaco editor theme
+    </color_palette>
+
+    <typography>
+      - Sans-serif system font stack (Inter, SF Pro, Roboto, system-ui)
+      - Headings: font-semibold
+      - Body: font-normal, leading-relaxed
+      - Code: Monospace (JetBrains Mono, Consolas, Monaco)
+      - Message text: text-base (16px), comfortable line-height
+    </typography>
+
+    <components>
+      <{UI_COMPONENT_1}>
+        {UI_COMPONENT_DESCRIPTION_LIST_1}
+      </{UI_COMPONENT_1}>
+
+      <{UI_COMPONENT_2}>
+        {UI_COMPONENT_DESCRIPTION_LIST_2}
+      </{UI_COMPONENT_2}>
+
+      <buttons>
+        - Primary: Orange/amber background, white text, rounded
+        - Secondary: Border style with hover fill
+        - Icon buttons: Square with hover background
+        - Disabled state: Reduced opacity, no pointer events
+      </buttons>
+
+      <inputs>
+        - Rounded borders with focus ring
+        - Textarea auto-resize
+        - Placeholder text in gray
+        - Error states in red
+        - Character counter
+      </inputs>
+
+      <cards>
+        - Subtle border or shadow
+        - Rounded corners (8px)
+        - Padding: p-4 to p-6
+        - Hover state: slight shadow increase
+      </cards>
+    </components>
+
+    <animations>
+      - Smooth transitions (150-300ms)
+      - Fade in for new messages
+      - Slide in for sidebar
+      - Typing indicator animation
+      - Loading spinner for generation
+      - Skeleton loaders for content
+    </animations>
+  </design_system>
+
+  <key_interactions>
+    <{KEY_INTERACTION_1}>
+      {KEY_INTERACTION_DESCRIPTION_LIST_1}
+    </{KEY_INTERACTION_1}>
+
+    <{KEY_INTERATION_2}>
+      {KEY_INTERACTION_DESCRIPTION_LIST_2}
+    </{KEY_INTERATION_2}>
+
+    <message_flow>
+      1. User types message in input field
+      2. Optional: Attach images via button
+      3. Click send or press Enter
+      4. Message appears in chat immediately
+      5. Typing indicator shows while waiting
+      6. Response streams in word by word
+      7. Code blocks render with syntax highlighting
+      8. Artifacts detected and rendered in side panel
+      9. Message complete, enable regenerate option
+    </message_flow>
+  </key_interactions>
+
+  <implementation_steps>
+    <step number="1">
+      <title>Setup Project Foundation and Database</title>
+      <tasks>
+        - Initialize Next.js server with SQLite database
+        - Set up API client with streaming support
+        - Create database schema with migrations
+        - Implement authentication endpoints
+        - Set up basic CORS and middleware
+        - Create health check endpoint
+      </tasks>
+    </step>
+
+    <step number="2">
+      <title>{IMPLEMENTATION_STEP_2_TITLE}</title>
+      <tasks>
+        {IMPLEMENTATION_STEP_2_TASK_LIST}
+      </tasks>
+    </step>
+
+    <step number="3">
+      <title>{IMPLEMENTATION_STEP_3_TITLE}</title>
+      <tasks>
+        {IMPLEMENTATION_STEP_3_TASK_LIST}
+      </tasks>
+    </step>
+  </implementation_steps>
+
+  <success_criteria>
+    <functionality>
+      {FUNCTIONALITY_SUCCESS_CRITERIA_LIST}
+    </functionality>
+
+    <user_experience>
+      {UX_SUCCESS_CRITERIA_LIST}
+    </user_experience>
+
+    <technical_quality>
+      - Clean, maintainable code structure
+      - Proper error handling throughout
+      - Secure API key management
+      - Optimized database queries
+      - Efficient streaming implementation
+      - Comprehensive testing coverage
+    </technical_quality>
+
+    <design_polish>
+      - Consistent with public website branding & visual design
+      - Beautiful typography and spacing
+      - Smooth animations and micro-interactions
+      - Excellent contrast and accessibility
+      - Professional, polished appearance
+      - Dark mode fully implemented
+    </design_polish>
+  </success_criteria>
+</project_specification>
