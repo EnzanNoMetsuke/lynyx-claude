@@ -44,7 +44,7 @@ new projects to completion.
 - The skill **MUST** provide a `Ctrl + P` keyboard shortcut to pause, and
   allow the same command to resume when issued again. If this keyboard shortcut
   cannot be implemented by the plugin itself, clear step-by-step instructions
-  **MUST** be provided provided to the user to guide them on how to implement it.
+  **MUST** be provided to the user to guide them on how to implement it.
 
 ## Security
 
