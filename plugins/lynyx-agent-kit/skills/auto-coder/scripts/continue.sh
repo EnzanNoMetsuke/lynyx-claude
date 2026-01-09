@@ -48,7 +48,7 @@ while true; do
     echo ""
 
     # Run coding session
-    if claude -p "/auto-coder code"; then
+    if claude -p "/lynyx-agent-kit:auto-coder code"; then
         # Session completed successfully
         FAILURE_COUNT=0
         echo ""
