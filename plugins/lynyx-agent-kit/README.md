@@ -89,9 +89,9 @@ Autonomous multi-session feature development orchestrator. Systematically implem
 
 **Usage:**
 ```
-/auto-coder init [spec_file]   # Initialize project from specification
-/auto-coder code               # Implement next incomplete feature
-/auto-coder status             # Show current progress
+/lynyx-agent-kit:auto-coder init [spec_file]   # Initialize project from specification
+/lynyx-agent-kit:auto-coder code               # Implement next incomplete feature
+/lynyx-agent-kit:auto-coder status             # Show current progress
 ```
 
 **Workflow:**
@@ -103,7 +103,7 @@ Autonomous multi-session feature development orchestrator. Systematically implem
 
 2. **Initialize auto-coder** to generate feature list:
    ```
-   /auto-coder init SPEC.txt
+   /lynyx-agent-kit:auto-coder init SPEC.txt
    ```
    - Analyzes spec and creates `feature_list.json` with test cases
    - Orders features by priority and dependency (critical path)
@@ -111,7 +111,7 @@ Autonomous multi-session feature development orchestrator. Systematically implem
 
 3. **Run coding sessions** (one feature per session):
    ```
-   /auto-coder code
+   /lynyx-agent-kit:auto-coder code
    ```
    - Runs regression tests on high-priority passing features
    - Implements next incomplete feature
@@ -121,14 +121,14 @@ Autonomous multi-session feature development orchestrator. Systematically implem
 
 4. **Auto-continue** until project completion:
    ```bash
-   while true; do claude -p "/auto-coder code" || break; sleep 3; done
+   while true; do claude -p "/lynyx-agent-kit:auto-coder code" || break; sleep 3; done
    ```
 
 **Session Management:**
 - Sessions auto-named: `auto-coder: {PROJECT} | {TASK_ID}`
 - Pause: `Ctrl+C` or `Ctrl+D`
 - Resume interrupted: `claude --resume "auto-coder: {PROJECT} | {TASK_ID}"`
-- Start fresh: `claude -p "/auto-coder code"`
+- Start fresh: `claude -p "/lynyx-agent-kit:auto-coder code"`
 
 **Generated Files:**
 ```
