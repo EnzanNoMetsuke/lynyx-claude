@@ -9,9 +9,9 @@ Orchestrates autonomous multi-session feature development using the auto-coder s
 
 **Usage:**
 
-- `/auto-coder init [spec_file]` - Initialize project with feature list from spec
-- `/auto-coder code` - Implement next incomplete feature
-- `/auto-coder status` - Show current progress without making changes
+- `/lynyx-agent-kit:auto-coder init [spec_file]` - Initialize project with feature list from spec
+- `/lynyx-agent-kit:auto-coder code` - Implement next incomplete feature
+- `/lynyx-agent-kit:auto-coder status` - Show current progress without making changes
 
 ## Argument Parsing
 
@@ -47,7 +47,7 @@ Orchestrates autonomous multi-session feature development using the auto-coder s
 **Example:**
 
 ```
-> /auto-coder init SPEC.txt
+> /lynyx-agent-kit:auto-coder init SPEC.txt
 
 Reading specification from SPEC.txt...
 Analyzing requirements...
@@ -63,7 +63,7 @@ Initialized git repository
 Created commit: abc1234
 
 INITIALIZATION COMPLETE
-Next: claude -p "/auto-coder code"
+Next: claude -p "/lynyx-agent-kit:auto-coder code"
 ```
 
 ## Mode: `code`
@@ -78,7 +78,7 @@ Next: claude -p "/auto-coder code"
    - Orient to project state
    - Run regression tests on HIGH priority passing features
    - Select next incomplete feature
-   - Rename session: `auto-coder: {PROJECT_NAME} | {TASK_ID}`
+   - Rename session: `/rename auto-coder: {PROJECT_NAME} | {TASK_ID}`
    - Implement the feature
    - Run all tests for the feature
    - Update feature_list.json (only if ALL tests pass)
@@ -90,7 +90,7 @@ Next: claude -p "/auto-coder code"
 **Example:**
 
 ```
-> /auto-coder code
+> /lynyx-agent-kit:auto-coder code
 
 Reading project state...
 Project: My Web App (MWA)
@@ -143,7 +143,7 @@ Next: MWA-007 - Dashboard widgets
 **Example:**
 
 ```
-> /auto-coder status
+> /lynyx-agent-kit:auto-coder status
 
 ═══════════════════════════════════════════════════════════════════════════════
                          AUTO-CODER STATUS
@@ -172,7 +172,7 @@ Next Feature:
 
 ═══════════════════════════════════════════════════════════════════════════════
 
-To continue: claude -p "/auto-coder code"
+To continue: claude -p "/lynyx-agent-kit:auto-coder code"
 ```
 
 ## Help (No Arguments)
@@ -187,17 +187,17 @@ If no valid mode is provided, display help:
 Autonomous multi-session feature development orchestrator.
 
 USAGE:
-  /auto-coder init [spec_file]   Initialize project from specification
-  /auto-coder code               Implement next incomplete feature
-  /auto-coder status             Show current progress
+  /lynyx-agent-kit:auto-coder init [spec_file]   Initialize project from specification
+  /lynyx-agent-kit:auto-coder code               Implement next incomplete feature
+  /lynyx-agent-kit:auto-coder status             Show current progress
 
 WORKFLOW:
   1. Create spec:  /lynyx-agent-kit:interview SPEC.txt
-  2. Initialize:   /auto-coder init SPEC.txt
-  3. Code:         /auto-coder code (repeat until complete)
+  2. Initialize:   /lynyx-agent-kit:auto-coder init SPEC.txt
+  3. Code:         /lynyx-agent-kit:auto-coder code (repeat until complete)
 
 AUTO-CONTINUATION:
-  while true; do claude -p "/auto-coder code" || break; sleep 3; done
+  while true; do claude -p "/lynyx-agent-kit:auto-coder code" || break; sleep 3; done
 
 PAUSE/RESUME:
   Pause:  Ctrl+C or Ctrl+D
@@ -217,7 +217,7 @@ Create a specification first:
   /lynyx-agent-kit:interview SPEC.txt
 
 Then initialize:
-  /auto-coder init SPEC.txt
+  /lynyx-agent-kit:auto-coder init SPEC.txt
 ```
 
 ### Not initialized (code/status mode)
@@ -228,7 +228,7 @@ ERROR: Auto-coder not initialized
 No .auto-coder/feature_list.json found.
 
 Initialize first:
-  /auto-coder init SPEC.txt
+  /lynyx-agent-kit:auto-coder init SPEC.txt
 ```
 
 ### Invalid mode
@@ -241,5 +241,5 @@ Valid commands:
   code   - Implement next feature
   status - Show progress
 
-Run /auto-coder without arguments for help.
+Run /lynyx-agent-kit:auto-coder without arguments for help.
 ```

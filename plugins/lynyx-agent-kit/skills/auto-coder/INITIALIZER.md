@@ -248,15 +248,15 @@ Files created:
 
 To begin coding, start a NEW session and run:
 
-  claude -p "/auto-coder code"
+  claude -p "/lynyx-agent-kit:auto-coder code"
 
 For auto-continuation (runs until complete or interrupted):
 
-  while true; do claude -p "/auto-coder code" || break; sleep 3; done
+  while true; do claude -p "/lynyx-agent-kit:auto-coder code" || break; sleep 3; done
 
 To check progress at any time:
 
-  claude -p "/auto-coder status"
+  claude -p "/lynyx-agent-kit:auto-coder status"
 
 ═══════════════════════════════════════════════════════════════════════════════
 ```
@@ -272,7 +272,7 @@ Please create a specification first:
   /lynyx-agent-kit:interview SPEC.txt
 
 Then run initialization again:
-  /auto-coder init SPEC.txt
+  /lynyx-agent-kit:auto-coder init SPEC.txt
 ```
 
 ### Existing feature_list.json
@@ -283,7 +283,7 @@ If `.auto-coder/feature_list.json` already exists:
 WARNING: .auto-coder/feature_list.json already exists.
 
 Options:
-1. Resume coding with existing feature list (/auto-coder code)
+1. Resume coding with existing feature list (/lynyx-agent-kit:auto-coder code)
 2. Overwrite and reinitialize (destroys existing progress)
 
 What would you like to do?

@@ -2,7 +2,7 @@
 description: >
   Autonomous multi-session feature development framework. Use when the user wants to
   systematically implement features from a specification, track progress across sessions,
-  and ensure all tests pass before marking features complete. Activated by the /auto-coder
+  and ensure all tests pass before marking features complete. Activated by the /lynyx-agent-kit:auto-coder
   command or when working with feature_list.json files in an .auto-coder directory.
 ---
 
@@ -32,7 +32,7 @@ See [FEATURE_SCHEMA.md](FEATURE_SCHEMA.md) for the complete JSON schema.
 
 ### Phase 1: Initialization
 
-Run with `/auto-coder init [spec_file]`
+Run with `/lynyx-agent-kit:auto-coder init [spec_file]`
 
 For detailed instructions, see [INITIALIZER.md](INITIALIZER.md).
 
@@ -47,7 +47,7 @@ For detailed instructions, see [INITIALIZER.md](INITIALIZER.md).
 
 ### Phase 2: Coding
 
-Run with `/auto-coder code`
+Run with `/lynyx-agent-kit:auto-coder code`
 
 For detailed instructions, see [CODER.md](CODER.md).
 
@@ -77,14 +77,14 @@ Sessions are automatically named for easy identification:
 
 1. **To pause**: Exit session with Ctrl+C or Ctrl+D (context preserved)
 2. **To resume**: `claude --resume "auto-coder: {PROJECT_NAME} | {TASK_ID}"`
-3. **To start fresh**: `claude -p "/auto-coder code"` (new session)
+3. **To start fresh**: `claude -p "/lynyx-agent-kit:auto-coder code"` (new session)
 
 ## Auto-Continuation
 
 For fully autonomous operation, use a shell loop:
 
 ```bash
-while true; do claude -p "/auto-coder code" || break; sleep 3; done
+while true; do claude -p "/lynyx-agent-kit:auto-coder code" || break; sleep 3; done
 ```
 
 Or use the helper script:

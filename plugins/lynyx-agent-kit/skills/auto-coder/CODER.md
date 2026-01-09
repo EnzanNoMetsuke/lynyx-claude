@@ -15,7 +15,7 @@ If prerequisites aren't met:
 >
 > Run initialization first:
 > ```
-> /auto-coder init SPEC.txt
+> /lynyx-agent-kit:auto-coder init SPEC.txt
 > ```
 
 ## Coding Workflow (10 Steps)
@@ -269,7 +269,7 @@ Next feature: {NEXT_TASK_ID} - {NEXT_DESCRIPTION}
 
 To continue in a NEW session:
 
-  claude -p "/auto-coder code"
+  claude -p "/lynyx-agent-kit:auto-coder code"
 
 To resume THIS session (if interrupted):
 
