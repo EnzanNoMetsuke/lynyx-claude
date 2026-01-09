@@ -9,7 +9,12 @@ Read the spec file and conduct a thorough interview using the AskUserQuestion to
 
 **Usage:** `/interview [spec_file]`
 - If a spec file path is provided as an argument, use that file
-- If no argument is provided, default to `SPEC.md` in the current project's root directory
+- If no argument is provided, default to either `SPEC.txt` or `SPEC.md` (whichever exists) in the current project's root directory
+- If a `SPEC.txt` file is discovered, use the [app_spec_template.txt](examples/app_spec_template.txt) resource as a model for the spec
+  to create based off of the user's responses during the interview. Make sure to update all placeholders (e.g. `{PLACEHOLDER}`) in your
+  output with the correct information or replace with "N/A" if not applicable to the project.
+- If no argument is provided AND neither `SPEC.txt` nor `SPEC.md` exist in the current project's root directory, then offer to create
+  a fresh `SPEC.md` if the user can provide a brief description of the project and its key requirements
 
 ## Interview Guidelines
 
