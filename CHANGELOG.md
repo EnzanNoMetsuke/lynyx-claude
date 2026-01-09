@@ -2,7 +2,6 @@
 
 ### 🚀 Features
 
-- Add auto-coder spec
 - Create new auto-coder skill
 
 ### 🐛 Bug Fixes
@@ -20,6 +19,7 @@
 
 - Ignore macOS files
 - Ignore changelog update commits in release notes
+- Ignore spec creation in release notes
 ## [0.1.1] - 2026-01-04
 
 ### 📚 Documentation
