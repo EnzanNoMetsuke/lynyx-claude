@@ -141,7 +141,7 @@ Custom commands and tools for development workflows, including specification-dri
 **Skills:**
 - `auto-coder` - Autonomous multi-session feature development framework
 
-See `plugins/lynyx-agent-kit/README.md` for details.
+See [plugins/lynyx-agent-kit/README.md](plugins/lynyx-agent-kit/README.md) for details.
 
 ### git
 
@@ -156,7 +156,7 @@ Git workflow commands for common repository operations.
 - `/git:remote-init <repo_name> <private|public> [push]` - Create GitHub repo
 - `/git:help` - Show all git commands
 
-See `plugins/git/README.md` for details.
+See [plugins/git/README.md](plugins/git/README.md) for details.
 
 ## Development Workflow
 
@@ -301,9 +301,7 @@ Reviews pull requests and code changes following our team's coding standards.
 ## Validation
 
 To validate code style, run:
-```bash
-python scripts/style_checker.py <file>
-```
+`python scripts/style_checker.py <file>`
 
 The script checks formatting and returns errors without loading its source into context.
 ```
@@ -365,11 +363,10 @@ git push               # Push to remote
 ## References
 
 - [Claude Code Documentation](https://code.claude.com/docs)
-- [Plugin Development Guide](https://code.claude.com/docs/en/plugins-reference.md)
-- [Slash Commands Guide](https://code.claude.com/docs/en/slash-commands.md)
-- [Skills Guide](https://code.claude.com/docs/en/skills.md)
+- [Plugin Development Guide](https://code.claude.com/docs/en/plugins-reference)
+- [Slash Commands Guide](https://code.claude.com/docs/en/slash-commands)
+- [Skills Guide](https://code.claude.com/docs/en/skills)
 
 ## Author
 
-**lynyx**
-support@lynyx.net
+**Lynyx Consulting** | <claude@lynyx.net>
