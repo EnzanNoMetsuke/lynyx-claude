@@ -1,57 +1,72 @@
-# Claude Code Plugin Development Workspace
+# Claude Code Plugin Marketplace
 
-A local Claude Code plugin marketplace and development environment for custom plugins and skills.
+A public Claude Code plugin marketplace providing custom development tools, workflows, and AI-powered automation skills.
 
 ## Overview
 
-This project serves as a development workspace for custom Claude Code plugins. It's configured as a local marketplace, allowing rapid iteration and testing of plugins before publishing to a shared marketplace.
+This project is a public marketplace for Claude Code plugins developed by Lynyx Consulting. It provides production-ready plugins for git workflows, specification-driven development, and autonomous coding capabilities. The marketplace can be used both as a public resource and as a local development environment for creating and testing new plugins.
 
 ## Project Structure
 
 ```
 .
 ├── .claude-plugin/
-│   └── marketplace.json      # Local marketplace configuration
-├── .specs/                   # Specification files for features
-│   └── SPEC-*.md            # Individual feature specs
-├── plugins/                  # Plugin source directories
-│   ├── lynyx-agent-kit/     # Custom agent toolkit plugin
+│   └── marketplace.json         # Marketplace configuration
+├── .specs/                      # Specification files for features
+│   ├── SPEC-20260103_01-Development_Workflows.md
+│   └── SPEC-20260107_01-Auto-Coder.md
+├── plugins/                     # Plugin source directories
+│   ├── git/                    # Git workflow commands plugin
 │   │   ├── .claude-plugin/
-│   │   │   └── plugin.json  # Plugin manifest
+│   │   │   └── plugin.json     # Plugin manifest
 │   │   ├── commands/
-│   │   │   └── interview.md
+│   │   │   ├── commit.md
+│   │   │   ├── help.md
+│   │   │   ├── init.md
+│   │   │   ├── new-branch.md
+│   │   │   ├── push.md
+│   │   │   ├── remote-init.md
+│   │   │   └── status.md
 │   │   └── README.md
-│   └── git/                 # Git workflow commands plugin
+│   └── lynyx-agent-kit/        # Custom agent toolkit plugin
 │       ├── .claude-plugin/
-│       │   └── plugin.json
+│       │   └── plugin.json     # Plugin manifest
 │       ├── commands/
-│       │   ├── init.md
-│       │   ├── status.md
-│       │   ├── new-branch.md
-│       │   ├── commit.md
-│       │   ├── push.md
-│       │   ├── remote-init.md
-│       │   └── help.md
+│       │   ├── examples/
+│       │   │   └── app_spec_template.txt
+│       │   ├── auto-coder.md
+│       │   └── interview.md
+│       ├── skills/
+│       │   └── auto-coder/
+│       │       ├── scripts/
+│       │       ├── CODER.md
+│       │       ├── FEATURE_SCHEMA.md
+│       │       ├── INITIALIZER.md
+│       │       └── SKILL.md    # Skill definition
 │       └── README.md
-├── CLAUDE.md                 # Project guidelines for Claude Code
-└── README.md                 # This file
+├── .gitignore
+├── CHANGELOG.md
+├── CLAUDE.md                    # Project guidelines for Claude Code
+├── cliff.toml                   # Changelog generator config
+└── README.md                    # This file
 ```
 
 ## How It Works
 
-### Local Marketplace
+### Public Marketplace
 
-The `.claude-plugin/marketplace.json` file registers local plugin directories:
+The `.claude-plugin/marketplace.json` file defines the public marketplace and registers all available plugins:
 
 ```json
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "lynyx-claude-plugins",
+  "name": "lynyx-claude",
   "version": "1.0.0",
-  "description": "A local Claude Code plugin marketplace for custom development tools and workflows",
+  "description": "A Claude Code plugin marketplace for custom development tools and workflows by Lynyx Consulting",
   "owner": {
-    "name": "lynyx",
-    "email": "support@lynyx.net"
+    "name": "Lynyx Consulting",
+    "email": "claude@lynyx.net",
+    "url": "https://github.com/EnzanNoMetsuke/lynyx-claude"
   },
   "plugins": [
     {
@@ -70,13 +85,13 @@ The `.claude-plugin/marketplace.json` file registers local plugin directories:
 }
 ```
 
-When Claude Code starts in this directory, it automatically loads plugins from the local marketplace.
+The marketplace can be accessed both locally for development and publicly via GitHub.
 
 ### Plugin Cache
 
 Plugins are cached at:
 ```
-~/.claude/plugins/cache/lynyx-claude-plugins/<plugin-name>/<version>/
+~/.claude/plugins/cache/lynyx-claude/<plugin-name>/<version>/
 ```
 
 When you bump a plugin's version number, Claude Code creates a new cache entry and loads the updated plugin.
@@ -85,10 +100,16 @@ When you bump a plugin's version number, Claude Code creates a new cache entry a
 
 ### lynyx-agent-kit
 
-Custom commands and tools for development workflows.
+Custom commands and tools for development workflows, including specification-driven development and autonomous coding.
 
 **Commands:**
 - `/lynyx-agent-kit:interview [spec_file]` - Interactive spec interviewer
+- `/lynyx-agent-kit:auto-coder init [spec_file]` - Initialize project with feature list from spec
+- `/lynyx-agent-kit:auto-coder code` - Implement next incomplete feature
+- `/lynyx-agent-kit:auto-coder status` - Show current progress without making changes
+
+**Skills:**
+- `auto-coder` - Autonomous multi-session feature development framework
 
 See `plugins/lynyx-agent-kit/README.md` for details.
 
@@ -159,6 +180,114 @@ argument-hint: [optional_args]
 
 Instructions for Claude on how to execute this command.
 ```
+
+### Adding a Skill
+
+Skills are model-invoked capabilities that Claude automatically applies based on context. Unlike commands (which users explicitly invoke with `/plugin:command`), Skills are activated when Claude determines they're relevant to the user's request.
+
+#### Skill Directory Structure
+
+Skills must follow this specific filesystem structure:
+
+```
+plugins/my-plugin/
+└── skills/
+    └── my-skill/          # Skill directory (lowercase, hyphens only)
+        ├── SKILL.md       # Required: Skill definition
+        ├── reference.md   # Optional: Detailed documentation
+        ├── examples.md    # Optional: Usage examples
+        └── scripts/       # Optional: Utility scripts
+            └── helper.py
+```
+
+#### Creating a SKILL.md File
+
+The `SKILL.md` file is the only required file and has two parts: YAML metadata (frontmatter) and Markdown instructions.
+
+**Basic Example:**
+
+```markdown
+---
+name: my-skill
+description: >
+  Brief description of what this skill does and when to use it.
+  Claude uses this to decide when to apply the skill automatically.
+---
+
+# My Skill
+
+## Overview
+
+Clear explanation of what this skill does.
+
+## Instructions
+
+Provide step-by-step guidance for Claude:
+
+1. First, do this...
+2. Then, check for...
+3. Finally, output...
+
+## Examples
+
+Show concrete examples of using this skill.
+```
+
+**Available YAML Metadata Fields:**
+
+- `name` (required): Skill name using lowercase letters, numbers, and hyphens only (max 64 characters)
+- `description` (required): What the skill does and when to use it (max 1024 characters)
+- `allowed-tools` (optional): Tools Claude can use without asking permission when this skill is active
+- `model` (optional): Specific Claude model to use when this skill is active
+- `context` (optional): Set to `fork` to run the skill in an isolated sub-agent context
+- `agent` (optional): Agent type to use when `context: fork` is set
+- `user-invocable` (optional): Whether the skill appears in slash command menu (defaults to `true`)
+
+#### Progressive Disclosure with Supporting Files
+
+To keep the main context focused, use **progressive disclosure**: put essential information in `SKILL.md` and detailed reference material in separate files. Claude will only load supporting files when needed.
+
+**Example with supporting files:**
+
+```markdown
+---
+name: code-reviewer
+description: Review code changes using team standards
+---
+
+# Code Review Skill
+
+## Overview
+
+Reviews pull requests and code changes following our team's coding standards.
+
+## Instructions
+
+1. Read the code changes
+2. Check against standards in [reference.md](reference.md)
+3. Review examples in [examples.md](examples.md) for guidance
+4. Provide feedback with specific line numbers
+
+## Validation
+
+To validate code style, run:
+```bash
+python scripts/style_checker.py <file>
+```
+
+The script checks formatting and returns errors without loading its source into context.
+```
+
+#### Testing Your Skill
+
+1. Create the skill directory and `SKILL.md` file
+2. Bump the plugin version in `.claude-plugin/plugin.json`
+3. Restart Claude Code
+4. Test by making requests that should trigger the skill
+
+#### Reference Documentation
+
+For complete guidance on creating Skills, see the [Anthropic Skills documentation](https://code.claude.com/docs/en/skills).
 
 ### Testing Changes
 
