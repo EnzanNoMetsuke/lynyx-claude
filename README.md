@@ -13,8 +13,7 @@ This project is a public marketplace for Claude Code plugins developed by Lynyx 
 ├── .claude-plugin/
 │   └── marketplace.json         # Marketplace configuration
 ├── .specs/                      # Specification files for features
-│   ├── SPEC-20260103_01-Development_Workflows.md
-│   └── SPEC-20260107_01-Auto-Coder.md
+│   └── SPEC-*.md                # Individual feature specs
 ├── plugins/                     # Plugin source directories
 │   ├── git/                    # Git workflow commands plugin
 │   │   ├── .claude-plugin/
@@ -86,6 +85,37 @@ The `.claude-plugin/marketplace.json` file defines the public marketplace and re
 ```
 
 The marketplace can be accessed both locally for development and publicly via GitHub.
+
+### Installing the Marketplace
+
+To use this marketplace in Claude Code, add it using one of the following methods:
+
+#### Via GitHub Repository
+
+```bash
+/plugin marketplace add EnzanNoMetsuke/lynyx-claude
+```
+
+#### Via Git URL
+
+```bash
+/plugin marketplace add https://github.com/EnzanNoMetsuke/lynyx-claude.git
+```
+
+#### Via Local Path (for development)
+
+```bash
+/plugin marketplace add /path/to/lynyx-claude
+```
+
+Once added, you can install plugins from the marketplace:
+
+```bash
+/plugin install lynyx-agent-kit@lynyx-claude
+/plugin install git@lynyx-claude
+```
+
+For more details on marketplace management and plugin installation, see the [Anthropic plugin documentation](https://code.claude.com/docs/en/discover-plugins).
 
 ### Plugin Cache
 
