@@ -18,7 +18,8 @@ This plugin is configured in the local marketplace at `.claude-plugin/marketplac
     {
       "name": "lynyx-agent-kit",
       "source": "./plugins/lynyx-agent-kit",
-      "description": "Custom skills and tools for Claude Code"
+      "description": "Custom skills and tools for Claude Code",
+      "category": "development"
     }
   ]
 }

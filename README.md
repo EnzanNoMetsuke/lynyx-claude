@@ -45,20 +45,26 @@ The `.claude-plugin/marketplace.json` file registers local plugin directories:
 
 ```json
 {
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "lynyx-claude-plugins",
+  "version": "1.0.0",
+  "description": "A local Claude Code plugin marketplace for custom development tools and workflows",
   "owner": {
-    "name": "lynyx"
+    "name": "lynyx",
+    "email": "support@lynyx.net"
   },
   "plugins": [
     {
       "name": "lynyx-agent-kit",
       "source": "./plugins/lynyx-agent-kit",
-      "description": "Custom skills and tools for Claude Code"
+      "description": "Custom skills and tools for Claude Code",
+      "category": "development"
     },
     {
       "name": "git",
       "source": "./plugins/git",
-      "description": "Git workflow commands for common repository operations"
+      "description": "Git workflow commands for common repository operations",
+      "category": "development"
     }
   ]
 }
@@ -124,7 +130,16 @@ See `plugins/git/README.md` for details.
    }
    ```
 
-3. Add to marketplace configuration in `.claude-plugin/marketplace.json`
+3. Add to marketplace configuration in `.claude-plugin/marketplace.json`:
+   ```json
+   {
+     "name": "my-plugin",
+     "source": "./plugins/my-plugin",
+     "description": "Brief description",
+     "category": "development"
+   }
+   ```
+   Categories: `development`, `productivity`, `learning`, or `security`
 
 4. Create commands in `plugins/my-plugin/commands/`
 
