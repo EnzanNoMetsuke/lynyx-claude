@@ -6,13 +6,13 @@
   "owner": {
     "name": "Lynyx Consulting",
     "email": "claude@lynyx.net",
-    "url": "https://github.com/EnzanNoMetsuke/lynyx-claude-customizations"
+    "url": "https://github.com/EnzanNoMetsuke/lynyx-claude"
   },
   "metadata": {
     "description": "Give Claude Code a particular set of skills.",
     "version": "1.0.0",
     "homepage": "https://lynyx.net/claude",
-    "repository": "https://github.com/EnzanNoMetsuke/lynyx-claude-customizations",
+    "repository": "https://github.com/EnzanNoMetsuke/lynyx-claude",
     "license": "AGPL",
     "keywords": [
       "plugins",
