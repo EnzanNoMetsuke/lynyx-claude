@@ -1,21 +1,41 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "lynyx-claude-plugins",
+  "name": "lynyx-claude",
   "version": "1.0.0",
-  "description": "A local Claude Code plugin marketplace for custom development tools and workflows",
+  "description": "A Claude Code plugin marketplace for custom development tools and workflows by Lynyx Consulting",
   "owner": {
-    "name": "lynyx",
-    "email": "support@lynyx.net"
+    "name": "Lynyx Consulting",
+    "email": "claude@lynyx.net",
+    "url": "https://github.com/EnzanNoMetsuke/lynyx-claude-customizations"
+  },
+  "metadata": {
+    "description": "Give Claude Code a particular set of skills.",
+    "version": "1.0.0",
+    "homepage": "https://lynyx.net/claude",
+    "repository": "https://github.com/EnzanNoMetsuke/lynyx-claude-customizations",
+    "license": "AGPL",
+    "keywords": [
+      "plugins",
+      "skills",
+      "commands",
+      "automation",
+      "development",
+      "vibe-coding",
+      "project-management",
+      "ai-tools"
+    ]
   },
   "plugins": [
     {
       "name": "lynyx-agent-kit",
+      "version": "1.2.1",
       "source": "./plugins/lynyx-agent-kit",
       "description": "Custom skills and tools for Claude Code",
       "category": "development"
     },
     {
       "name": "git",
+      "version": "1.0.0",
       "source": "./plugins/git",
       "description": "Git workflow commands for common repository operations",
       "category": "development"
