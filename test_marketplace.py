@@ -65,7 +65,22 @@ class TestResult:
 
 
 def parse_yaml_frontmatter(content: str) -> Tuple[Dict, str]:
-    """Parse YAML frontmatter from markdown content."""
+    """Parse YAML frontmatter from markdown content.
+    
+    Note: This is a simple YAML parser designed specifically for Claude Code
+    plugin frontmatter. It handles common patterns but is not a complete YAML
+    parser. For production use with complex YAML, consider using PyYAML.
+    
+    Supported features:
+    - Simple key: value pairs
+    - Multi-line values with > indicator
+    - Quoted strings
+    
+    Limitations:
+    - Does not handle | (literal) block indicators
+    - Does not handle YAML lists or nested structures
+    - Does not handle inline comments
+    """
     if not content.startswith('---'):
         return {}, content
         

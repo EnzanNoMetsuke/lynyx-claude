@@ -168,7 +168,7 @@ for cmd_file in plugins/*/commands/*.md; do
         
         # Check if file has content after frontmatter
         # Count lines after the closing --- of frontmatter
-        content_lines=$(awk '/^---$/{if(++count==2) flag=1; next} flag' "$cmd_file" | grep -c .)
+        content_lines=$(awk '/^---[[:space:]]*$/{if(++count==2) flag=1; next} flag' "$cmd_file" | grep -c .)
         if [ "$content_lines" -gt 5 ]; then
             test_pass "Command '$plugin_name:$cmd_name' has sufficient content"
         else
