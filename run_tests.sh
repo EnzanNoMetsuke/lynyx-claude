@@ -81,11 +81,11 @@ fi
 
 # Final summary
 echo -e "\n${CYAN}╔════════════════════════════════════════════════════════════╗${NC}"
-echo -e "${CYAN}║${NC}  ${BLUE}Final Test Summary${NC}                                      ${CYAN}║${NC}"
+echo -e "${CYAN}║${NC}  ${BLUE}Final Test Summary${NC}                                        ${CYAN}║${NC}"
 echo -e "${CYAN}╠════════════════════════════════════════════════════════════╣${NC}"
-echo -e "${CYAN}║${NC}  Total Suites:  ${BLUE}$TOTAL_SUITES${NC}                                        ${CYAN}║${NC}"
-echo -e "${CYAN}║${NC}  Passed:        ${GREEN}$PASSED_SUITES${NC}                                        ${CYAN}║${NC}"
-echo -e "${CYAN}║${NC}  Failed:        ${RED}$FAILED_SUITES${NC}                                        ${CYAN}║${NC}"
+echo -e "${CYAN}║${NC}  Total Suites:  ${BLUE}$TOTAL_SUITES${NC}                                          ${CYAN}║${NC}"
+echo -e "${CYAN}║${NC}  Passed:        ${GREEN}$PASSED_SUITES${NC}                                          ${CYAN}║${NC}"
+echo -e "${CYAN}║${NC}  Failed:        ${RED}$FAILED_SUITES${NC}                                          ${CYAN}║${NC}"
 echo -e "${CYAN}╚════════════════════════════════════════════════════════════╝${NC}"
 
 if [ $FAILED_SUITES -eq 0 ]; then
