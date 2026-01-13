@@ -1,11 +1,3 @@
-## [1.2.2] - 2026-01-13
-
-### 🐛 Bug Fixes
-
-- Fix auto-coder command file references when plugin is installed at user-level
-- Inline INITIALIZER.md and CODER.md instructions directly into auto-coder.md command
-- Update SKILL.md to reference command instead of external markdown files
-
 ## [1.0.1] - 2026-01-11
 
 ### 📚 Documentation

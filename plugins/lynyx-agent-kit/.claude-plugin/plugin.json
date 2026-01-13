@@ -1,7 +1,7 @@
 {
   "name": "lynyx-agent-kit",
   "description": "Custom skills and tools for Claude Code",
-  "version": "1.2.2",
+  "version": "1.2.1",
   "author": {
     "name": "lynyx",
     "email": "support@lynyx.net"

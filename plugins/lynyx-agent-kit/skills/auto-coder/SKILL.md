@@ -26,13 +26,15 @@ All auto-coder state is persisted in the `.auto-coder/` directory:
 | `feature_list.json` | Source of truth for features, test cases, and completion status |
 | `progress.md` | Human-readable log of session activity |
 
+See [FEATURE_SCHEMA.md](FEATURE_SCHEMA.md) for the complete JSON schema.
+
 ## Phases
 
 ### Phase 1: Initialization
 
 Run with `/lynyx-agent-kit:auto-coder init [spec_file]`
 
-The `/lynyx-agent-kit:auto-coder init` command contains complete instructions for the initialization phase.
+For detailed instructions, see [INITIALIZER.md](INITIALIZER.md).
 
 **Summary:**
 
@@ -47,7 +49,7 @@ The `/lynyx-agent-kit:auto-coder init` command contains complete instructions fo
 
 Run with `/lynyx-agent-kit:auto-coder code`
 
-The `/lynyx-agent-kit:auto-coder code` command contains complete instructions for the coding phase.
+For detailed instructions, see [CODER.md](CODER.md).
 
 **Summary:**
 
