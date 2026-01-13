@@ -18,32 +18,110 @@ If prerequisites aren't met:
 > /lynyx-agent-kit:auto-coder init SPEC.txt
 > ```
 
-## Coding Workflow (10 Steps)
+## Sub-Agent Architecture
 
-### Step 1: Orient to Project State
+To optimize context window usage, the coding phase uses two specialized sub-agents:
 
-Read and understand current project state:
+1. **Task Selector Agent** (`agents/task-selector.md`): Reads `feature_list.json` and reports the next task in a compact format
+2. **Task Implementer Agent** (`agents/task-implementer.md`): Implements the selected task and updates tracking files
 
-```bash
-# Read feature list
-cat .auto-coder/feature_list.json
+This approach prevents the main agent's context window from being filled with the full feature list.
 
-# Read recent progress (last 50 lines)
-tail -50 .auto-coder/progress.md
+## Coding Workflow (3 Steps)
 
-# Check git history
-git log --oneline -10
+### Step 1: Spawn Task Selector Agent
 
-# Check working directory status
-git status
+Spawn a sub-agent using the instructions from `agents/task-selector.md`.
+
+The sub-agent will:
+1. Read `.auto-coder/feature_list.json`
+2. Identify the next incomplete feature
+3. Report essential task information in a compact format
+
+**Expected output format:**
+
+```
+TASK_SELECTOR_REPORT
+---
+project_name: {PROJECT_NAME}
+project_prefix: {PREFIX}
+progress: {COMPLETED}/{TOTAL}
+next_task:
+  id: {TASK_ID}
+  description: {DESCRIPTION}
+  category: {CATEGORY}
+  priority: {PRIORITY}
+  steps:
+    - {STEP 1}
+    - {STEP 2}
+    ...
+high_priority_passing:
+  - {TASK_ID_1}
+  - {TASK_ID_2}
+  ...
+---
+END_REPORT
 ```
 
-**Extract from feature_list.json:**
+**Handle special cases:**
+- If `status: COMPLETE`, all features are done - display project completion message
+- If `status: NOT_INITIALIZED`, show initialization error
+- If `status: ERROR`, display the error and abort
 
-- Project name and prefix
-- Total features and completion count
-- Next incomplete feature (first with `passes: false`)
-- Any uncommitted changes from interrupted session
+### Step 2: Spawn Task Implementer Agent
+
+Once you have the task details from Step 1, spawn a sub-agent using the instructions from `agents/task-implementer.md`.
+
+Pass the task information to the sub-agent in this format:
+
+```
+IMPLEMENT_TASK
+---
+project_name: {PROJECT_NAME}
+project_prefix: {PREFIX}
+task:
+  id: {TASK_ID}
+  description: {DESCRIPTION}
+  category: {CATEGORY}
+  priority: {PRIORITY}
+  steps:
+    - {STEP 1}
+    - {STEP 2}
+    ...
+high_priority_passing:
+  - {TASK_ID_1}
+  - {TASK_ID_2}
+  ...
+---
+```
+
+The sub-agent will:
+1. Run regression tests on high-priority passing features
+2. Implement the feature
+3. Verify all test steps pass
+4. Update `feature_list.json`
+5. Create git commit
+6. Update `progress.md`
+
+### Step 3: Handle Implementer Response
+
+Parse the response from the Task Implementer agent and take appropriate action:
+
+**On SUCCESS:**
+Display the session completion message with progress and next steps.
+
+**On REGRESSION_FOUND:**
+Report the regression and suggest fixing it before proceeding.
+
+**On TESTS_FAILED:**
+Report which tests failed and suggest debugging.
+
+**On ERROR:**
+Display the error message and abort.
+
+## Legacy Workflow Reference
+
+The detailed step-by-step workflow (for reference or manual execution) follows below.
 
 ### Step 2: Regression Check (HIGH PRIORITY ONLY)
 
