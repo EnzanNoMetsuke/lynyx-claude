@@ -2,6 +2,17 @@
 
 A public Claude Code plugin marketplace providing custom development tools, workflows, and AI-powered automation skills.
 
+[![Tests](https://img.shields.io/badge/tests-passing-brightgreen)]()
+[![Plugins](https://img.shields.io/badge/plugins-2-blue)]()
+[![Commands](https://img.shields.io/badge/commands-9-blue)]()
+
+## Quick Links
+
+- 📖 [Installation & Usage](#installing-the-marketplace)
+- 🧪 [Testing Guide](TESTING.md)
+- 🔌 [Available Plugins](#available-plugins)
+- 🛠️ [Development Workflow](#development-workflow)
+
 ## Overview
 
 This project is a public marketplace for Claude Code plugins developed by Lynyx Consulting. It provides production-ready plugins for git workflows, specification-driven development, and autonomous coding capabilities. The marketplace can be used both as a public resource and as a local development environment for creating and testing new plugins.
@@ -359,6 +370,44 @@ git push               # Push to remote
 ```
 
 **Note:** Follow [Conventional Commits](https://www.conventionalcommits.org/) format for all commits.
+
+## Testing
+
+This project includes comprehensive test suites to validate the marketplace and plugin configurations.
+
+### Quick Start
+
+Run all tests:
+```bash
+./run_tests.sh
+```
+
+Run individual test suites:
+```bash
+# Python validation suite
+python3 test_marketplace.py
+
+# Bash installation suite  
+bash test_installation.sh
+
+# Claude CLI validation suite (official validation)
+bash test_claude_cli.sh
+```
+
+### Test Coverage
+
+The test suites validate:
+- Marketplace configuration (marketplace.json)
+- Plugin manifests (plugin.json files)
+- Command definitions and structure
+- Skill definitions and structure
+- Documentation completeness
+- Version consistency
+- **Official Claude Code compliance** (via `claude plugin validate`)
+
+**Total validations:** 138+ checks across all test suites
+
+For detailed testing instructions, including manual testing in Claude Code, see [TESTING.md](TESTING.md).
 
 ## References
 
