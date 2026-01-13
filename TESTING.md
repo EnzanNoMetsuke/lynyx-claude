@@ -49,6 +49,10 @@ The Claude CLI validation suite uses the official Claude Code CLI to validate ma
 **Installation:**
 The test suite automatically installs the Claude CLI if not present using:
 - pnpm package: `pnpm add -g @anthropic-ai/claude-code` (if Node.js v18+ and pnpm are available)
+  - Automatically detects OS and configures PNPM_HOME:
+    - macOS: `~/Library/pnpm`
+    - Linux: `~/.local/share/pnpm`
+    - Windows: `~/AppData/Local/pnpm`
 - Official installer: `curl -fsSL https://claude.ai/install.sh | bash` (fallback)
 
 **Validations performed:**

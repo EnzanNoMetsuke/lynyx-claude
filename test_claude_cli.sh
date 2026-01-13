@@ -62,18 +62,39 @@ else
         NODE_VERSION=$(node --version 2>&1)
         echo -e "  ${BLUE}Node.js version: ${NODE_VERSION}${NC}"
         
+        # Detect operating system and set PNPM_HOME accordingly
+        OS_TYPE=$(uname -s)
+        case "$OS_TYPE" in
+            Darwin*)
+                # macOS
+                DEFAULT_PNPM_HOME="$HOME/Library/pnpm"
+                ;;
+            Linux*)
+                # Linux
+                DEFAULT_PNPM_HOME="$HOME/.local/share/pnpm"
+                ;;
+            MINGW*|MSYS*|CYGWIN*)
+                # Windows (Git Bash, MSYS2, Cygwin)
+                DEFAULT_PNPM_HOME="$HOME/AppData/Local/pnpm"
+                ;;
+            *)
+                # Default fallback
+                DEFAULT_PNPM_HOME="$HOME/.local/share/pnpm"
+                ;;
+        esac
+        
         # Setup pnpm if not already configured
         if ! pnpm root -g &> /dev/null; then
             echo -e "  ${BLUE}Setting up pnpm...${NC}"
             pnpm setup &> /dev/null || true
-            export PNPM_HOME="$HOME/.local/share/pnpm"
+            export PNPM_HOME="${PNPM_HOME:-$DEFAULT_PNPM_HOME}"
             export PATH="$PNPM_HOME:$PATH"
         fi
         
         echo -e "  ${BLUE}Installing Claude CLI via pnpm...${NC}"
         if pnpm add -g @anthropic-ai/claude-code &> /dev/null; then
             # Update PATH to include pnpm global bin
-            export PNPM_HOME="${PNPM_HOME:-$HOME/.local/share/pnpm}"
+            export PNPM_HOME="${PNPM_HOME:-$DEFAULT_PNPM_HOME}"
             export PATH="$PNPM_HOME:$PATH"
             test_pass "Claude CLI installed via pnpm"
         else
