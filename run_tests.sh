@@ -64,6 +64,21 @@ else
     echo -e "${YELLOW}⚠ test_installation.sh not found${NC}"
 fi
 
+# Test 3: Claude CLI validation suite
+print_test_header "Test Suite 3: Claude CLI Validator"
+if [ -f "test_claude_cli.sh" ]; then
+    ((TOTAL_SUITES++))
+    if bash test_claude_cli.sh; then
+        echo -e "\n${GREEN}✓ Claude CLI validation suite PASSED${NC}"
+        ((PASSED_SUITES++))
+    else
+        echo -e "\n${RED}✗ Claude CLI validation suite FAILED${NC}"
+        ((FAILED_SUITES++))
+    fi
+else
+    echo -e "${YELLOW}⚠ test_claude_cli.sh not found${NC}"
+fi
+
 # Final summary
 echo -e "\n${CYAN}╔════════════════════════════════════════════════════════════╗${NC}"
 echo -e "${CYAN}║${NC}  ${BLUE}Final Test Summary${NC}                                      ${CYAN}║${NC}"

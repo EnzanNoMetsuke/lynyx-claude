@@ -72,14 +72,27 @@ $ ./run_tests.sh
 - ✓ Installation instructions
 - ✓ Version consistency
 
+#### Test Suite 3: Claude CLI Validator
+**Status:** ✓ PASSED
+**Tests Run:** 9
+**Tests Passed:** 9
+**Tests Failed:** 0
+
+**Coverage:**
+- ✓ Claude CLI installation/availability
+- ✓ Marketplace manifest validation (official)
+- ✓ Plugin manifest validation (official)
+- ✓ Complete structure validation
+- ✓ Official Claude Code compliance
+
 ### Combined Results
 
 ```
 ╔════════════════════════════════════════════════════════════╗
 ║  Final Test Summary                                      ║
 ╠════════════════════════════════════════════════════════════╣
-║  Total Suites:  2                                        ║
-║  Passed:        2                                        ║
+║  Total Suites:  3                                        ║
+║  Passed:        3                                        ║
 ║  Failed:        0                                        ║
 ╚════════════════════════════════════════════════════════════╝
 
@@ -87,7 +100,7 @@ $ ./run_tests.sh
 The marketplace is validated and ready for use.
 ```
 
-**Total Validations:** 129+ individual checks
+**Total Validations:** 138+ individual checks
 
 ## Installation Validation
 

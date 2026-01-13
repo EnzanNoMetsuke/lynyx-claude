@@ -20,9 +20,10 @@ Run the complete test suite:
 ./run_tests.sh
 ```
 
-This executes two test suites:
+This executes three test suites:
 1. **Python Marketplace Validator** - Deep validation of JSON configs and markdown files
 2. **Installation Validator** - Bash-based structure and documentation tests
+3. **Claude CLI Validator** - Official Claude Code validation using the `claude` CLI
 
 ### Running Individual Test Suites
 
@@ -35,6 +36,27 @@ python3 test_marketplace.py
 ```bash
 bash test_installation.sh
 ```
+
+**Claude CLI validation suite:**
+```bash
+bash test_claude_cli.sh
+```
+
+### Claude CLI Validation
+
+The Claude CLI validation suite uses the official Claude Code CLI to validate manifests:
+
+**Installation:**
+The test suite automatically installs the Claude CLI if not present using:
+- NPM package: `npm install -g @anthropic-ai/claude-code` (if Node.js v18+ is available)
+- Official installer: `curl -fsSL https://claude.ai/install.sh | bash` (fallback)
+
+**Validations performed:**
+- Marketplace manifest: `claude plugin validate .claude-plugin/marketplace.json`
+- Plugin manifests: `claude plugin validate plugins/*/`.claude-plugin/plugin.json`
+- Complete structure: `claude plugin validate .`
+
+This ensures the marketplace passes all official Claude Code validation checks.
 
 ## Manual Testing in Claude Code
 
@@ -169,6 +191,12 @@ After installation, test the commands to ensure they work correctly.
 - ✓ Marketplace version defined
 - ✓ Plugin versions match between marketplace.json and plugin.json
 
+#### 7. Official Claude Code Validation
+- ✓ Marketplace manifest passes `claude plugin validate`
+- ✓ All plugin manifests pass `claude plugin validate`
+- ✓ Complete marketplace structure validated
+- ✓ Compliance with official Claude Code standards
+
 ## Expected Test Results
 
 When running `./run_tests.sh`, you should see:
@@ -176,12 +204,16 @@ When running `./run_tests.sh`, you should see:
 ```
 ✓ Python validation suite PASSED
 ✓ Installation validation suite PASSED
+✓ Claude CLI validation suite PASSED
 
 🎉 All test suites passed!
 The marketplace is validated and ready for use.
 ```
 
-**Total checks performed:** 129+ individual validations across both test suites
+**Total checks performed:** 138+ individual validations across all test suites
+- Python validator: 76 checks
+- Installation validator: 53 checks  
+- Claude CLI validator: 9 checks
 
 ## Troubleshooting
 

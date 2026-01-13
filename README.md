@@ -389,6 +389,9 @@ python3 test_marketplace.py
 
 # Bash installation suite  
 bash test_installation.sh
+
+# Claude CLI validation suite (official validation)
+bash test_claude_cli.sh
 ```
 
 ### Test Coverage
@@ -400,9 +403,9 @@ The test suites validate:
 - Skill definitions and structure
 - Documentation completeness
 - Version consistency
-- Installation instructions
+- **Official Claude Code compliance** (via `claude plugin validate`)
 
-**Total validations:** 129+ checks across all test suites
+**Total validations:** 138+ checks across all test suites
 
 For detailed testing instructions, including manual testing in Claude Code, see [TESTING.md](TESTING.md).
 
