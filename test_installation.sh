@@ -152,12 +152,12 @@ for cmd_file in plugins/*/commands/*.md; do
         plugin_name=$(echo "$cmd_file" | cut -d'/' -f2)
         cmd_name=$(basename "$cmd_file" .md)
         
-        # Check if file has YAML frontmatter
-        if grep -q "^---$" "$cmd_file"; then
+        # Check if file has YAML frontmatter starting at the first line
+        if awk 'NR==1{if($0!="---") exit 1} NR>1 && $0=="---"{exit 0} END{exit 1}' "$cmd_file"; then
             test_pass "Command '$plugin_name:$cmd_name' has YAML frontmatter"
-            
-            # Check if it has description
-            if grep -q "^description:" "$cmd_file"; then
+
+            # Check if it has description within frontmatter
+            if awk 'NR==1{if($0!="---") exit 1} NR>1 && $0=="---"{exit found?0:1} /^description:/ {found=1} END{exit 1}' "$cmd_file"; then
                 test_pass "Command '$plugin_name:$cmd_name' has description"
             else
                 test_fail "Command '$plugin_name:$cmd_name' has description" "Missing description field"
@@ -168,7 +168,7 @@ for cmd_file in plugins/*/commands/*.md; do
         
         # Check if file has content after frontmatter
         # Count lines after the closing --- of frontmatter
-        content_lines=$(awk '/^---[[:space:]]*$/{if(++count==2) flag=1; next} flag' "$cmd_file" | grep -c .)
+        content_lines=$(awk 'NR==1{if($0!="---") exit} /^---[[:space:]]*$/{if(++count==2) flag=1; next} flag' "$cmd_file" | grep -c .)
         if [ "$content_lines" -gt 5 ]; then
             test_pass "Command '$plugin_name:$cmd_name' has sufficient content"
         else
@@ -189,12 +189,12 @@ for skill_dir in plugins/*/skills/*/; do
         if [ -f "$skill_dir/SKILL.md" ]; then
             test_pass "Skill '$plugin_name:$skill_name' has SKILL.md"
             
-            # Check for YAML frontmatter
-            if grep -q "^---$" "$skill_dir/SKILL.md"; then
+            # Check for YAML frontmatter starting at the first line
+            if awk 'NR==1{if($0!="---") exit 1} NR>1 && $0=="---"{exit 0} END{exit 1}' "$skill_dir/SKILL.md"; then
                 test_pass "Skill '$plugin_name:$skill_name' has YAML frontmatter"
-                
-                # Check for description
-                if grep -q "^description:" "$skill_dir/SKILL.md"; then
+
+                # Check for description within frontmatter
+                if awk 'NR==1{if($0!="---") exit 1} NR>1 && $0=="---"{exit found?0:1} /^description:/ {found=1} END{exit 1}' "$skill_dir/SKILL.md"; then
                     test_pass "Skill '$plugin_name:$skill_name' has description"
                 else
                     test_fail "Skill '$plugin_name:$skill_name' has description" "Missing description field"
