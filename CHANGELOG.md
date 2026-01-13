@@ -1,3 +1,33 @@
+## [1.1.0] - 2026-01-13
+
+### 🚀 Features
+
+- Add comprehensive test suite for marketplace validation
+- Add Claude CLI validation test suite with official validation commands
+- Add OS-specific PNPM_HOME detection for macOS, Linux, and Windows
+
+### 🐛 Bug Fixes
+
+- Address code review feedback - improve YAML parser docs and fix shell patterns
+- *(tests)* Correct frontmatter checks in installation tests
+- Correct AWK frontmatter detection logic in test_installation.sh
+
+### 🚜 Refactor
+
+- Use pnpm instead of npm for Claude CLI installation
+
+### 📚 Documentation
+
+- Add comprehensive testing documentation and test runner
+
+### 🎨 Styling
+
+- *(run_tests.sh)* Fix formatting issues in Final Test Summary table
+
+### ⚙️ Miscellaneous Tasks
+
+- Bump marketplace minor version from 1.0.0 to 1.1.0
+- Remove DEMONSTRATION.md as it's unnecessary
 ## [1.0.1] - 2026-01-11
 
 ### 📚 Documentation
