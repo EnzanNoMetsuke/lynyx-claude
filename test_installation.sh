@@ -153,11 +153,11 @@ for cmd_file in plugins/*/commands/*.md; do
         cmd_name=$(basename "$cmd_file" .md)
         
         # Check if file has YAML frontmatter starting at the first line
-        if awk 'NR==1{if($0!="---") exit 1} NR>1 && $0=="---"{exit 0} END{exit 1}' "$cmd_file"; then
+        if awk 'BEGIN{found=0} NR==1{if($0!="---") exit 1} NR>1 && $0=="---"{found=1; exit 0} END{exit !found}' "$cmd_file"; then
             test_pass "Command '$plugin_name:$cmd_name' has YAML frontmatter"
 
             # Check if it has description within frontmatter
-            if awk 'NR==1{if($0!="---") exit 1} NR>1 && $0=="---"{exit found?0:1} /^description:/ {found=1} END{exit 1}' "$cmd_file"; then
+            if awk 'BEGIN{has_desc=0} NR==1{if($0!="---") exit 1} /^description:/{has_desc=1} NR>1 && $0=="---"{exit !has_desc}' "$cmd_file"; then
                 test_pass "Command '$plugin_name:$cmd_name' has description"
             else
                 test_fail "Command '$plugin_name:$cmd_name' has description" "Missing description field"
@@ -190,11 +190,11 @@ for skill_dir in plugins/*/skills/*/; do
             test_pass "Skill '$plugin_name:$skill_name' has SKILL.md"
             
             # Check for YAML frontmatter starting at the first line
-            if awk 'NR==1{if($0!="---") exit 1} NR>1 && $0=="---"{exit 0} END{exit 1}' "$skill_dir/SKILL.md"; then
+            if awk 'BEGIN{found=0} NR==1{if($0!="---") exit 1} NR>1 && $0=="---"{found=1; exit 0} END{exit !found}' "$skill_dir/SKILL.md"; then
                 test_pass "Skill '$plugin_name:$skill_name' has YAML frontmatter"
 
                 # Check for description within frontmatter
-                if awk 'NR==1{if($0!="---") exit 1} NR>1 && $0=="---"{exit found?0:1} /^description:/ {found=1} END{exit 1}' "$skill_dir/SKILL.md"; then
+                if awk 'BEGIN{has_desc=0} NR==1{if($0!="---") exit 1} /^description:/{has_desc=1} NR>1 && $0=="---"{exit !has_desc}' "$skill_dir/SKILL.md"; then
                     test_pass "Skill '$plugin_name:$skill_name' has description"
                 else
                     test_fail "Skill '$plugin_name:$skill_name' has description" "Missing description field"
