@@ -28,6 +28,7 @@
 
 - Bump marketplace minor version from 1.0.0 to 1.1.0
 - Remove DEMONSTRATION.md as it's unnecessary
+- Update commit parsing rules in cliff.toml
 ## [1.0.1] - 2026-01-11
 
 ### 📚 Documentation
