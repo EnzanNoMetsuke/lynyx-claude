@@ -57,14 +57,25 @@ if command -v claude &> /dev/null; then
 else
     test_warning "Claude CLI not found" "Attempting to install..."
     
-    # Try NPM installation first (since Node.js is available)
-    if command -v npm &> /dev/null; then
+    # Try pnpm installation first (since Node.js is available)
+    if command -v pnpm &> /dev/null; then
         NODE_VERSION=$(node --version 2>&1)
         echo -e "  ${BLUE}Node.js version: ${NODE_VERSION}${NC}"
         
-        echo -e "  ${BLUE}Installing Claude CLI via NPM...${NC}"
-        if npm install -g @anthropic-ai/claude-code 2>&1 | grep -q "added\|up to date"; then
-            test_pass "Claude CLI installed via NPM"
+        # Setup pnpm if not already configured
+        if ! pnpm root -g &> /dev/null; then
+            echo -e "  ${BLUE}Setting up pnpm...${NC}"
+            pnpm setup &> /dev/null || true
+            export PNPM_HOME="$HOME/.local/share/pnpm"
+            export PATH="$PNPM_HOME:$PATH"
+        fi
+        
+        echo -e "  ${BLUE}Installing Claude CLI via pnpm...${NC}"
+        if pnpm add -g @anthropic-ai/claude-code &> /dev/null; then
+            # Update PATH to include pnpm global bin
+            export PNPM_HOME="${PNPM_HOME:-$HOME/.local/share/pnpm}"
+            export PATH="$PNPM_HOME:$PATH"
+            test_pass "Claude CLI installed via pnpm"
         else
             # Try official installer as fallback
             echo -e "  ${BLUE}Trying official installer...${NC}"
@@ -73,7 +84,7 @@ else
                 # Source the shell config to make claude command available
                 export PATH="$HOME/.claude/bin:$PATH"
             else
-                test_fail "Claude CLI installation" "Failed to install via NPM or official installer"
+                test_fail "Claude CLI installation" "Failed to install via pnpm or official installer"
                 echo -e "\n${RED}Cannot proceed without Claude CLI${NC}"
                 exit 1
             fi
