@@ -121,9 +121,9 @@ Display the error message and abort.
 
 ## Legacy Workflow Reference
 
-The detailed step-by-step workflow (for reference or manual execution) follows below.
+The detailed step-by-step workflow (for reference or manual execution) follows below. These steps were previously executed directly by the main agent, but are now handled by the Task Implementer sub-agent.
 
-### Step 2: Regression Check (HIGH PRIORITY ONLY)
+### Legacy Step 1: Regression Check (HIGH PRIORITY ONLY)
 
 **MANDATORY:** Before starting new work, verify existing functionality still works.
 
@@ -148,7 +148,7 @@ The detailed step-by-step workflow (for reference or manual execution) follows b
 - Reduces overhead while catching important breakages
 - Medium/low features are tested when their turns come
 
-### Step 3: Feature Selection
+### Legacy Step 2: Feature Selection
 
 Select the next feature to implement:
 
@@ -167,7 +167,7 @@ Select the next feature to implement:
    /rename auto-coder: {PROJECT_NAME} | {TASK_ID}
    ```
 
-### Step 4: Implementation
+### Legacy Step 3: Implementation
 
 Implement the feature according to its description and test steps.
 
@@ -193,7 +193,7 @@ Implement the feature according to its description and test steps.
    - Handle errors gracefully
    - Avoid introducing vulnerabilities
 
-### Step 5: Test Verification
+### Legacy Step 4: Test Verification
 
 **ALL tests for this feature must pass before marking complete.**
 
@@ -228,7 +228,7 @@ Feature: MWA-001 - User authentication with email/password
 - Re-run ALL tests for this feature
 - Repeat until all pass
 
-### Step 6: Update Feature List
+### Legacy Step 5: Update Feature List
 
 **Only after ALL tests pass**, update `feature_list.json`:
 
@@ -261,7 +261,7 @@ Feature: MWA-001 - User authentication with email/password
 }
 ```
 
-### Step 7: Git Commit
+### Legacy Step 6: Git Commit
 
 Create a descriptive commit for the completed feature:
 
@@ -297,7 +297,7 @@ git add .auto-coder/feature_list.json
 git commit --amend --no-edit
 ```
 
-### Step 8: Update Progress Log
+### Legacy Step 7: Update Progress Log
 
 Append to `.auto-coder/progress.md`:
 
@@ -322,7 +322,7 @@ Append to `.auto-coder/progress.md`:
 ---
 ```
 
-### Step 9: Session Completion
+### Legacy Step 8: Session Completion
 
 Output session completion message:
 
@@ -356,7 +356,7 @@ To resume THIS session (if interrupted):
 ═══════════════════════════════════════════════════════════════════════════════
 ```
 
-### Step 10: Handle Project Completion
+### Legacy Step 9: Handle Project Completion
 
 When ALL features have `passes: true`:
 
