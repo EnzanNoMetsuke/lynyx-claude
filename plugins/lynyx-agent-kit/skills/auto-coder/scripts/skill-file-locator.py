@@ -8,14 +8,14 @@ This script helps agents running the auto-coder skill find the skill's instructi
 files (CODER.md, INITIALIZER.md, etc.) in a deterministic manner.
 
 Usage:
-    python file-locator.py [skill_name]
+    python skill-file-locator.py [skill_name]
 
     skill_name: Name of the skill to locate (default: auto-coder)
 
 Output:
     Tree view of the skill's files with full paths, for example:
 
-    /Users/lynyx/.claude/plugins/cache/lynyx-claude/lynyx-agent-kit/1.2.1/skills/auto-coder
+    ~/.claude/plugins/cache/lynyx-claude/lynyx-agent-kit/1.2.1/skills/auto-coder
     ├── scripts
     │   └── continue.sh
     ├── CODER.md
@@ -160,8 +160,9 @@ def locate_skill_files(skill_name: str = "auto-coder") -> int:
                     print(f"  - {item.name}", file=sys.stderr)
         return 1
     
-    # Output the tree view
-    print(skill_dir)
+    # Output the tree view with ~ shorthand for home directory
+    skill_dir_display = str(skill_dir).replace(str(home), "~")
+    print(skill_dir_display)
     tree_lines = build_tree(skill_dir)
     for line in tree_lines:
         print(line)
