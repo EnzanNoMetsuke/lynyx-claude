@@ -39,7 +39,7 @@ python ~/.claude/plugins/cache/lynyx-claude/lynyx-agent-kit/<version>/skills/aut
 The script outputs the full path to the skill directory and a tree view of all skill files:
 
 ```
-/Users/lynyx/.claude/plugins/cache/lynyx-claude/lynyx-agent-kit/1.2.1/skills/auto-coder
+~/.claude/plugins/cache/lynyx-claude/lynyx-agent-kit/1.2.1/skills/auto-coder
 ├── scripts
 │   ├── continue.sh
 │   └── skill-file-locator.py
