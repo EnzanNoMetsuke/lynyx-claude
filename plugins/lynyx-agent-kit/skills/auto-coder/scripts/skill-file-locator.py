@@ -26,10 +26,9 @@ Output:
 
 import sys
 from pathlib import Path
-from typing import List, Optional, Tuple
 
 
-def parse_version(version_str: str) -> Optional[Tuple[int, int, int]]:
+def parse_version(version_str: str) -> tuple[int, int, int] | None:
     """
     Parse a semver version string into a comparable tuple.
     
@@ -54,7 +53,7 @@ def parse_version(version_str: str) -> Optional[Tuple[int, int, int]]:
     return None
 
 
-def get_latest_version(cache_dir: Path) -> Optional[str]:
+def get_latest_version(cache_dir: Path) -> str | None:
     """
     Find the latest version directory in the cache.
     
@@ -82,7 +81,7 @@ def get_latest_version(cache_dir: Path) -> Optional[str]:
     return versions[0][1]
 
 
-def build_tree(directory: Path, prefix: str = "", is_last: bool = True) -> List[str]:
+def build_tree(directory: Path, prefix: str = "", is_last: bool = True) -> list[str]:
     """
     Build a tree view of a directory structure.
     
