@@ -24,12 +24,12 @@ Output:
     └── SKILL.md
 """
 
-import os
 import sys
 from pathlib import Path
+from typing import List, Optional, Tuple
 
 
-def parse_version(version_str: str) -> tuple:
+def parse_version(version_str: str) -> Optional[Tuple[int, int, int]]:
     """
     Parse a semver version string into a comparable tuple.
     
@@ -54,7 +54,7 @@ def parse_version(version_str: str) -> tuple:
     return None
 
 
-def get_latest_version(cache_dir: Path) -> str | None:
+def get_latest_version(cache_dir: Path) -> Optional[str]:
     """
     Find the latest version directory in the cache.
     
@@ -82,7 +82,7 @@ def get_latest_version(cache_dir: Path) -> str | None:
     return versions[0][1]
 
 
-def build_tree(directory: Path, prefix: str = "", is_last: bool = True) -> list[str]:
+def build_tree(directory: Path, prefix: str = "", is_last: bool = True) -> List[str]:
     """
     Build a tree view of a directory structure.
     
