@@ -28,6 +28,34 @@ All auto-coder state is persisted in the `.auto-coder/` directory:
 
 See [FEATURE_SCHEMA.md](FEATURE_SCHEMA.md) for the complete JSON schema.
 
+## Locating Skill Files
+
+To quickly locate the auto-coder skill instruction files (CODER.md, INITIALIZER.md, etc.), use the `skill-file-locator.py` script:
+
+```bash
+python ~/.claude/plugins/cache/lynyx-claude/lynyx-agent-kit/<version>/skills/auto-coder/scripts/skill-file-locator.py
+```
+
+The script outputs the full path to the skill directory and a tree view of all skill files:
+
+```
+~/.claude/plugins/cache/lynyx-claude/lynyx-agent-kit/1.2.1/skills/auto-coder
+├── scripts
+│   ├── continue.sh
+│   └── skill-file-locator.py
+├── CODER.md
+├── FEATURE_SCHEMA.md
+├── INITIALIZER.md
+└── SKILL.md
+```
+
+**Usage:**
+
+- Default skill: `python skill-file-locator.py` (locates auto-coder skill)
+- Custom skill: `python skill-file-locator.py <skill-name>`
+
+Use this script at the start of each coding session to locate and read the appropriate instruction files (CODER.md for coding phase, INITIALIZER.md for initialization phase).
+
 ## Phases
 
 ### Phase 1: Initialization
