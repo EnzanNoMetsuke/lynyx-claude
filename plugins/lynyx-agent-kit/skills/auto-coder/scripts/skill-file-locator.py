@@ -28,7 +28,7 @@ import sys
 from pathlib import Path
 
 
-def parse_version(version_str: str) -> tuple[int, int, int] | None:
+def parse_version(version_str: str) -> tuple[int, int, int, bool] | None:
     """
     Parse a semver version string into a comparable tuple.
     
@@ -36,18 +36,27 @@ def parse_version(version_str: str) -> tuple[int, int, int] | None:
         version_str: Version string like "1.2.3" or "1.2.3-beta.1"
     
     Returns:
-        Tuple of (major, minor, patch) as integers, or None if invalid
+        Tuple of (major, minor, patch, is_stable) where is_stable is True for
+        release versions and False for prereleases. Returns None if invalid.
+        
+    Note:
+        According to semver, prereleases have lower precedence than the release
+        version (1.2.3 > 1.2.3-beta.1). The is_stable flag ensures stable releases
+        are preferred over prereleases with the same base version.
     """
     try:
-        # Strip any prerelease/build metadata for comparison (e.g., "-beta.1")
+        # Check if this is a prerelease (contains '-' before any '+')
+        has_prerelease = '-' in version_str.split('+')[0]
+        
+        # Strip any prerelease/build metadata for base version comparison
         base_version = version_str.split('-')[0].split('+')[0]
         parts = base_version.split('.')
         if len(parts) >= 3:
-            return (int(parts[0]), int(parts[1]), int(parts[2]))
+            return (int(parts[0]), int(parts[1]), int(parts[2]), not has_prerelease)
         elif len(parts) == 2:
-            return (int(parts[0]), int(parts[1]), 0)
+            return (int(parts[0]), int(parts[1]), 0, not has_prerelease)
         elif len(parts) == 1:
-            return (int(parts[0]), 0, 0)
+            return (int(parts[0]), 0, 0, not has_prerelease)
     except (ValueError, IndexError):
         pass
     return None
