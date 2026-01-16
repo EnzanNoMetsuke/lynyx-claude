@@ -1,3 +1,27 @@
+## [1.2.0] - 2026-01-16
+
+### 🚀 Features
+
+- Add file-locator.py script for deterministic skill file discovery
+
+### 🐛 Bug Fixes
+
+- Ensure Python 3.8+ compatibility for type annotations
+- Use Python 3.14 modern type annotation syntax
+- Respect prerelease ordering when picking latest version
+
+### 🚜 Refactor
+
+- Rename to skill-file-locator.py and add usage instructions to SKILL.md
+- Use ~ shorthand for home directory in output
+
+### 📚 Documentation
+
+- Use ~ shorthand for home directory in SKILL.md example output
+
+### ⚙️ Miscellaneous Tasks
+
+- Add Copilot custom instructions to enforce conventional commits
 ## [1.1.0] - 2026-01-13
 
 ### 🚀 Features
