@@ -68,55 +68,62 @@ Next: claude -p "/lynyx-agent-kit:auto-coder code"
 
 ## Mode: `code`
 
-**Purpose:** Implement the next incomplete feature.
+**Purpose:** Implement the next incomplete feature using sub-agents to optimize context usage.
 
 **Behavior:**
 
 1. Verify `.auto-coder/feature_list.json` exists
    - If not, show error and suggest running `init` first
-2. Follow the instructions in `skills/auto-coder/CODER.md`:
-   - Orient to project state
-   - Run regression tests on HIGH priority passing features
-   - Select next incomplete feature
-   - Rename session: `/rename auto-coder: {PROJECT_NAME} | {TASK_ID}`
-   - Implement the feature
-   - Run all tests for the feature
-   - Update feature_list.json (only if ALL tests pass)
-   - Create git commit
-   - Update progress.md
-   - Display completion message with next steps
-3. If all features are complete, display project completion message
+2. **Spawn Task Selector sub-agent** (`agents/task-selector.md`):
+   - Reads `feature_list.json` and reports next task in compact format
+   - Returns project info, next task details, and high-priority passing features
+   - Prevents main agent context from being filled with full feature list
+3. **Handle Task Selector response**:
+   - If `status: COMPLETE` → Display project completion message
+   - If `status: NOT_INITIALIZED` or `status: ERROR` → Show error and abort
+   - Otherwise → Proceed to implementation
+4. **Spawn Task Implementer sub-agent** (`agents/task-implementer.md`):
+   - Pass task details from Task Selector
+   - Handles regression testing, implementation, testing, and commit
+   - Returns completion status and progress
+5. **Handle Implementer response**:
+   - If `status: SUCCESS` → Display completion message with next steps
+   - If `status: REGRESSION_FOUND` → Report regression and abort
+   - If `status: TESTS_FAILED` → Report failed tests and abort
+   - If `status: ERROR` → Display error and abort
 
 **Example:**
 
 ```
 > /lynyx-agent-kit:auto-coder code
 
-Reading project state...
-Project: My Web App (MWA)
-Progress: 5/47 features complete (10%)
+[Spawning Task Selector agent...]
 
-Running regression tests on HIGH priority features...
-✓ MWA-001: User authentication
-✓ MWA-002: User registration
-✓ MWA-003: Protected routes
-All regression tests passed.
+TASK_SELECTOR_REPORT
+---
+project_name: My Web App
+project_prefix: MWA
+progress: 5/47
+next_task:
+  id: MWA-006
+  description: Dashboard layout
+  ...
+---
+END_REPORT
 
-Next feature: MWA-006 - Dashboard layout
-Renaming session: auto-coder: My Web App | MWA-006
+[Spawning Task Implementer agent with task MWA-006...]
 
-Implementing...
-[Implementation work happens here]
-
-Running tests...
-✓ Step 1: Dashboard page loads at /dashboard
-✓ Step 2: User name displayed in header
-✓ Step 3: Navigation sidebar present
-✓ Step 4: Main content area responsive
-All tests passed!
-
-Updating feature list...
-Creating commit: def5678
+TASK_IMPLEMENTER_REPORT
+---
+status: SUCCESS
+task_id: MWA-006
+description: Dashboard layout
+tests_passed: 4/4
+commit_hash: def5678
+progress: 6/47
+next_task_id: MWA-007
+---
+END_REPORT
 
 SESSION COMPLETE
 Progress: 6/47 (12%)

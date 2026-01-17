@@ -81,12 +81,17 @@ For detailed instructions, see [CODER.md](CODER.md).
 
 **Summary:**
 
-- Orient to project state (read files, git log)
-- Run regression tests on high-priority passing features
-- Select next incomplete feature
-- Implement and test the feature
-- Update `feature_list.json` and commit
-- Rename session: `auto-coder: {PROJECT_NAME} | {TASK_ID}`
+Uses sub-agent architecture to optimize context window usage:
+
+1. **Task Selector Agent** (`agents/task-selector.md`):
+   - Reads `feature_list.json` and reports next task compactly
+   - Prevents main agent context from filling up with full feature list
+
+2. **Task Implementer Agent** (`agents/task-implementer.md`):
+   - Run regression tests on high-priority passing features
+   - Implement and test the feature
+   - Update `feature_list.json` and commit
+   - Rename session: `auto-coder: {PROJECT_NAME} | {TASK_ID}`
 
 ## Session Management
 

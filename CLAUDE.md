@@ -64,6 +64,11 @@ Custom commands and tools for development workflows.
 
 **Commands:**
 - `/lynyx-agent-kit:interview [spec_file]` - Interactive spec interviewer
+- `/lynyx-agent-kit:auto-coder <init|code|status>` - Autonomous feature development orchestrator
+
+**Agents:**
+- `task-selector` - Reads `feature_list.json` and reports next task in compact format
+- `task-implementer` - Implements selected task with regression testing and commits
 
 ### git
 Git workflow commands for common repository operations.
